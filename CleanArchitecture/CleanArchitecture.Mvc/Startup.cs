@@ -1,4 +1,5 @@
 using CleanArchitecture.Data.Context;
+using CleanArchitecture.Infra.IoC;
 using CleanArchitecture.Mvc.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -41,6 +42,8 @@ namespace CleanArchitecture.Mvc
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
+
+            RegisterService(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -72,6 +75,11 @@ namespace CleanArchitecture.Mvc
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+        }
+
+        private static void RegisterService(IServiceCollection service)
+        {
+            DependencyContainer.RegisterService(service);
         }
     }
 }
