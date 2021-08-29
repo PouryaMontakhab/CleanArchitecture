@@ -10,5 +10,6 @@ namespace CleanArchitecture.Domian.Interfaces
     public interface ICourseRepositoryService
     {
         IEnumerable<Course> GetAll();
+        void Add(Course course);
     }
 }
