@@ -1,7 +1,11 @@
+using CleanArchitecture.Data.Context;
+using CleanArchitecture.Infra.IoC;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,10 +32,17 @@ namespace CleanArchitecture.Api
         {
 
             services.AddControllers();
+            services.AddDbContext<UniversityDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("UniversityDbContext"));
+            });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CleanArchitecture.Api", Version = "v1" });
             });
+            services.AddMediatR(typeof(Startup));
+            RegisterService(services);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +65,10 @@ namespace CleanArchitecture.Api
             {
                 endpoints.MapControllers();
             });
+        }
+        private static void RegisterService(IServiceCollection service)
+        {
+            DependencyContainer.RegisterService(service);
         }
     }
 }
