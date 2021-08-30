@@ -12,6 +12,7 @@
     <ProjectReference Include="..\CleanArchitecture.Application\CleanArchitecture.Application.csproj" />
     <ProjectReference Include="..\CleanArchitecture.Data\CleanArchitecture.Data.csproj" />
     <ProjectReference Include="..\CleanArchitecture.Domian\CleanArchitecture.Domian.csproj" />
+    <ProjectReference Include="..\CleanArchitecture.Infra.Bus\CleanArchitecture.Infra.Bus.csproj" />
   </ItemGroup>
 
 </Project>
