@@ -10,5 +10,6 @@ namespace CleanArchitecture.Application.Interfaces
     public interface ICourseService
     {
         CourseViewModel GetAll();
+        void CreteCourse(CourseViewModel courseViewModel);
     }
 }
